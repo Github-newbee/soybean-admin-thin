@@ -27,11 +27,13 @@ const {
     roleCode: undefined
   },
   columns: () => [
-    { type: 'selection', width: 48 },
+    // { type: 'selection', width: 48 },
     { prop: 'index', label: $t('common.index'), width: 64 },
-    { prop: 'roleName', label: $t('page.manage.role.roleName'), minWidth: 120 },
-    { prop: 'roleCode', label: $t('page.manage.role.roleCode'), minWidth: 120 },
-    { prop: 'roleDesc', label: $t('page.manage.role.roleDesc'), minWidth: 120 },
+    // { prop: 'roleName', label: $t('page.manage.role.roleName'), minWidth: 120 },
+    // { prop: 'roleCode', label: $t('page.manage.role.roleCode'), minWidth: 120 },
+    // { prop: 'roleDesc', label: $t('page.manage.role.roleDesc'), minWidth: 120 },
+    { prop: 'category_name', label: '分类名称' },
+    { prop: 'description', label: '分类描述' },
     {
       prop: 'status',
       label: $t('page.manage.role.roleStatus'),
@@ -138,7 +140,7 @@ function edit(id: number) {
         <div class="mt-20px flex justify-end">
           <ElPagination
             v-if="mobilePagination.total"
-            layout="total,prev,pager,next,sizes"
+            layout="prev,pager,next,sizes"
             v-bind="mobilePagination"
             @current-change="mobilePagination['current-change']"
             @size-change="mobilePagination['size-change']"

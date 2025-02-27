@@ -22,6 +22,11 @@ export function fetchGetUserInfo() {
   return request<Api.Auth.UserInfo>({ url: '/v1/system/user/profile' });
 }
 
+// 修改密码
+export function fetchPutChangePassword(data: { password: string }) {
+  return request({ url: '/v1/system/user', method: 'put', data });
+}
+
 /**
  * Refresh token
  *

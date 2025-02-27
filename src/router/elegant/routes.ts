@@ -104,6 +104,7 @@ export const generatedRoutes: GeneratedRoute[] = [
           title: 'manage_user',
           i18nKey: 'route.manage_user',
           icon: 'ic:round-manage-accounts',
+          keepAlive: true,
           order: 1
         }
       },
@@ -128,7 +129,7 @@ export const generatedRoutes: GeneratedRoute[] = [
     meta: {
       title: 'user-center',
       i18nKey: 'route.user-center',
-      order: 9999
+      hideInMenu: true
     }
   }
 ];

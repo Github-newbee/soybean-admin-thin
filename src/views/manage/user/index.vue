@@ -4,6 +4,7 @@ import { fetchGetUserList } from '@/service/api';
 import { $t } from '@/locales';
 import { enableStatusRecord } from '@/constants/business';
 import { useTable, useTableOperate } from '@/hooks/common/table';
+import { formatDate } from '@/utils/date';
 import UserOperateDrawer from './modules/user-operate-drawer.vue';
 import UserSearch from './modules/user-search.vue';
 
@@ -24,7 +25,7 @@ const {
   showTotal: true,
   apiParams: {
     skip: 0,
-    limit: 10,
+    limit: 50,
     status: undefined,
     username: undefined,
     userGender: undefined,
@@ -56,6 +57,7 @@ const {
     //   }
     // },
     { prop: 'nickname', label: $t('page.manage.user.nickName'), minWidth: 100 },
+    { prop: 'created_at', label: '创建时间', minWidth: 100, formatter: row => formatDate(row.created_at) },
     // { prop: 'userPhone', label: $t('page.manage.user.userPhone'), width: 120 },
     // { prop: 'userEmail', label: $t('page.manage.user.userEmail'), minWidth: 200 },
     {
@@ -100,7 +102,6 @@ const {
     }
   ]
 });
-
 const {
   drawerVisible,
   operateType,
@@ -164,16 +165,8 @@ function edit(id: number) {
           <ElTableColumn v-for="col in columns" :key="col.prop" v-bind="col" />
         </ElTable>
       </div>
+
       <div class="mt-20px flex justify-end">
-        <!--
- <ElPagination
-          v-if="mobilePagination.total"
-          layout="total,prev,pager,next,sizes"
-          v-bind="mobilePagination"
-          @current-change="mobilePagination['current-change']"
-          @size-change="mobilePagination['size-change']"
-        />
--->
         <ElPagination
           v-if="mobilePagination.total"
           layout="prev,pager,next,sizes"
@@ -182,6 +175,7 @@ function edit(id: number) {
           @size-change="mobilePagination['size-change']"
         />
       </div>
+
       <UserOperateDrawer
         v-model:visible="drawerVisible"
         :operate-type="operateType"

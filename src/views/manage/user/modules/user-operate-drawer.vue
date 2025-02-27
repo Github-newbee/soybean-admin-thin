@@ -117,7 +117,7 @@ watch(visible, () => {
 </script>
 
 <template>
-  <ElDrawer v-model="visible" :title="title" :size="360">
+  <ElDialog v-model="visible" :title="title" :size="360">
     <ElForm ref="formRef" :model="model" :rules="rules" label-position="top">
       <ElFormItem :label="$t('page.manage.user.username')" prop="username">
         <ElInput v-model="model.username" :placeholder="$t('page.manage.user.form.username')" />
@@ -153,7 +153,7 @@ watch(visible, () => {
         <ElButton type="primary" @click="handleSubmit">{{ $t('common.confirm') }}</ElButton>
       </ElSpace>
     </template>
-  </ElDrawer>
+  </ElDialog>
 </template>
 
 <style scoped></style>

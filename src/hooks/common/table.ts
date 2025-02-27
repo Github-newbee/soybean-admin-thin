@@ -30,7 +30,6 @@ export function useTable<A extends UI.TableApiFn>(config: UI.NaiveTableConfig<A>
 
   const state = reactive({
     skip: 0,
-    limit: 10,
     total: 0
   });
   const {
@@ -50,18 +49,19 @@ export function useTable<A extends UI.TableApiFn>(config: UI.NaiveTableConfig<A>
     columns: config.columns,
     transformer: res => {
       const { data: record = [] } = res || {};
-      const pageNum = state.skip / state.limit + 1;
-      if (record?.length === state.limit) {
-        const total = state.limit + state.skip + 1;
+
+      // Ensure that the size is greater than 0, If it is less than 0, it will cause paging calculation errors.
+      // eslint-disable-next-line @typescript-eslint/no-use-before-define
+      const pageSize = pagination.pageSize || 10;
+      const pageNum = state.skip / pageSize + 1;
+      if (record?.length === pageSize) {
+        const total = pageSize + state.skip + 1;
         if (total > state.total) {
           state.total = total;
         }
       } else {
         state.total = record?.length || 0;
       }
-      // Ensure that the size is greater than 0, If it is less than 0, it will cause paging calculation errors.
-      const pageSize = state.limit <= 0 ? 10 : state.limit;
-
       const recordsWithIndex = record?.map((item: any, index: number) => {
         return {
           ...item,
@@ -69,6 +69,7 @@ export function useTable<A extends UI.TableApiFn>(config: UI.NaiveTableConfig<A>
           index: state.skip + index + 1
         };
       });
+
       return {
         data: recordsWithIndex,
         pageNum,
@@ -131,7 +132,6 @@ export function useTable<A extends UI.TableApiFn>(config: UI.NaiveTableConfig<A>
     },
     onFetched: async transformed => {
       const { pageNum, pageSize, total } = transformed;
-
       updatePagination({
         currentPage: pageNum,
         pageSize,
@@ -143,7 +143,7 @@ export function useTable<A extends UI.TableApiFn>(config: UI.NaiveTableConfig<A>
 
   const pagination: Partial<RemoveReadonly<PaginationProps & PaginationEmits>> = reactive({
     currentPage: 1,
-    pageSize: 10,
+    pageSize: apiParams?.limit || 10,
     pageSizes: [10, 50, 100, 500],
     'current-change': (page: number) => {
       pagination.currentPage = page;
@@ -155,7 +155,7 @@ export function useTable<A extends UI.TableApiFn>(config: UI.NaiveTableConfig<A>
     'size-change': (pageSize: number) => {
       pagination.currentPage = 1;
       pagination.pageSize = pageSize;
-      state.limit = pageSize;
+      // state.limit = pageSize;
       state.skip = 0;
       state.total = 0;
       updateSearchParams({ skip: pagination.currentPage, limit: pageSize });
@@ -171,7 +171,6 @@ export function useTable<A extends UI.TableApiFn>(config: UI.NaiveTableConfig<A>
       ...pagination,
       pagerCount: isMobile.value ? 3 : 9
     };
-
     return p;
   });
 
@@ -185,12 +184,13 @@ export function useTable<A extends UI.TableApiFn>(config: UI.NaiveTableConfig<A>
    * @param pageNum the page number. default is 1
    */
   async function getDataByPage(pageNum: number = 1) {
+    state.skip = 0;
+    state.total = 0;
     updatePagination({
       currentPage: pageNum
     });
-
     updateSearchParams({
-      skip: pageNum,
+      skip: 0,
       limit: pagination.pageSize!
     });
 

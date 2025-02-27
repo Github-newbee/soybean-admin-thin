@@ -42,11 +42,11 @@ declare namespace Api {
       /** record creator */
       createBy: string;
       /** record create time */
-      createTime: string;
+      created_at: string;
       /** record updater */
       updateBy: string;
       /** record update time */
-      updateTime: string;
+      updated_at: string;
       /** record status */
       status: EnableStatus | undefined;
     } & T;
@@ -64,7 +64,7 @@ declare namespace Api {
     }
 
     interface UserInfo {
-      userId: string;
+      id: string;
       username: string;
       roles: string[];
       buttons: string[];
