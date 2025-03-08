@@ -2,11 +2,14 @@
 import { reactive, ref } from 'vue';
 import { useAuthStore } from '@/store/modules/auth';
 import { fetchPutChangePassword } from '@/service/api';
+import { useForm, useFormRules } from '@/hooks/common/form';
 
 const { userInfo, resetStore } = useAuthStore();
-const formRef = ref();
+const { formRef, validate } = useForm();
+const { formRules } = useFormRules();
+
 const rules = ref({
-  password: [{ required: true, message: '请输入密码', trigger: 'blur' }]
+  password: formRules.pwd
 });
 
 const model = reactive({
@@ -15,6 +18,7 @@ const model = reactive({
 });
 
 const onPutChangePassword = async () => {
+  await validate();
   const { error } = await fetchPutChangePassword({ password: model.password });
   if (!error) {
     window.$message?.success('修改成功,即将退出登录');

@@ -1,12 +1,14 @@
 <script setup lang="tsx">
 import { ElButton, ElPopconfirm, ElTag } from 'element-plus';
+import { ref } from 'vue';
 import { fetchGetUserList } from '@/service/api';
 import { $t } from '@/locales';
 import { enableStatusRecord } from '@/constants/business';
 import { useTable, useTableOperate } from '@/hooks/common/table';
 import { formatDate } from '@/utils/date';
 import UserOperateDrawer from './modules/user-operate-drawer.vue';
-import UserSearch from './modules/user-search.vue';
+// import UserSearch from './modules/user-search.vue';
+import { useSearchBar } from './model/search';
 
 defineOptions({ name: 'UserManage' });
 
@@ -17,9 +19,9 @@ const {
   getData,
   getDataByPage,
   loading,
-  mobilePagination,
-  searchParams,
-  resetSearchParams
+  mobilePagination
+  // searchParams,
+  // resetSearchParams
 } = useTable({
   apiFn: fetchGetUserList,
   showTotal: true,
@@ -133,11 +135,23 @@ function handleDelete(id: number) {
 function edit(id: number) {
   handleEdit(id);
 }
+
+const pageName = 'Agent';
+const searchRef = ref();
+const { options } = useSearchBar();
 </script>
 
 <template>
   <div class="min-h-500px flex-col-stretch gap-16px overflow-hidden lt-sm:overflow-auto">
-    <UserSearch v-model:model="searchParams" @reset="resetSearchParams" @search="getDataByPage" />
+    <!-- <UserSearch v-model:model="searchParams" @reset="resetSearchParams" @search="getDataByPage" /> -->
+    <SearchBar
+      ref="searchRef"
+      class="searchbar"
+      :page-name="pageName"
+      :keep-alive="true"
+      :options="options"
+      @search="getDataByPage"
+    />
     <ElCard class="sm:flex-1-hidden card-wrapper" body-class="ht50">
       <template #header>
         <div class="flex items-center justify-between">

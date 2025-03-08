@@ -18,7 +18,9 @@ export default defineConfig(
           ignores: ['/^icon-/']
         }
       ],
-      'unocss/order-attributify': 'off'
-    }
+      'unocss/order-attributify': 'off',
+      'no-console': 'off'
+    },
+    ignores: ['node_modules/**', 'dist']
   }
 );

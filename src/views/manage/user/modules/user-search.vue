@@ -77,6 +77,36 @@ async function search() {
           </ElFormItem>
         </ElCol>
         <ElCol :lg="6" :md="8" :sm="12">
+          <ElFormItem :label="$t('page.manage.user.nickName')" prop="nickName">
+            <ElInput v-model="model.nickName" :placeholder="$t('page.manage.user.form.nickName')" />
+          </ElFormItem>
+        </ElCol>
+        <ElCol :lg="6" :md="8" :sm="12">
+          <ElFormItem :label="$t('page.manage.user.userPhone')" prop="userPhone">
+            <ElInput v-model="model.userPhone" :placeholder="$t('page.manage.user.form.userPhone')" />
+          </ElFormItem>
+        </ElCol>
+        <ElCol :lg="6" :md="8" :sm="12">
+          <ElFormItem :label="$t('page.manage.user.userEmail')" prop="userEmail">
+            <ElInput v-model="model.userEmail" :placeholder="$t('page.manage.user.form.userEmail')" />
+          </ElFormItem>
+        </ElCol>
+        <ElCol :lg="6" :md="8" :sm="12">
+          <ElFormItem :label="$t('page.manage.user.nickName')" prop="nickName">
+            <ElInput v-model="model.nickName" :placeholder="$t('page.manage.user.form.nickName')" />
+          </ElFormItem>
+        </ElCol>
+        <ElCol :lg="6" :md="8" :sm="12">
+          <ElFormItem :label="$t('page.manage.user.userPhone')" prop="userPhone">
+            <ElInput v-model="model.userPhone" :placeholder="$t('page.manage.user.form.userPhone')" />
+          </ElFormItem>
+        </ElCol>
+        <ElCol :lg="6" :md="8" :sm="12">
+          <ElFormItem :label="$t('page.manage.user.userEmail')" prop="userEmail">
+            <ElInput v-model="model.userEmail" :placeholder="$t('page.manage.user.form.userEmail')" />
+          </ElFormItem>
+        </ElCol>
+        <ElCol :lg="6" :md="8" :sm="12">
           <ElFormItem :label="$t('page.manage.user.userStatus')" prop="userStatus">
             <ElSelect v-model="model.userGender" clearable :placeholder="$t('page.manage.user.form.userStatus')">
               <ElOption
@@ -92,13 +122,13 @@ async function search() {
           <ElSpace class="w-full justify-end" alignment="end">
             <ElButton @click="reset">
               <template #icon>
-                <icon-ic-round-refresh class="text-icon" />
+                <IconIcRoundRefresh class="text-icon" />
               </template>
               {{ $t('common.reset') }}
             </ElButton>
             <ElButton type="primary" plain @click="search">
               <template #icon>
-                <icon-ic-round-search class="text-icon" />
+                <IconIcRoundSearch class="text-icon" />
               </template>
               {{ $t('common.search') }}
             </ElButton>

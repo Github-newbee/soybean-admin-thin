@@ -62,6 +62,9 @@ importers:
       '@vueuse/core':
         specifier: 11.2.0
         version: 11.2.0(vue@3.5.13)
+      big.js:
+        specifier: ^6.2.2
+        version: 6.2.2
       clipboard:
         specifier: 2.0.11
         version: 2.0.11
@@ -156,6 +159,9 @@ importers:
       '@soybeanjs/eslint-config':
         specifier: 1.4.2
         version: 1.4.2(@unocss/eslint-config@0.64.1)(eslint-plugin-vue@9.31.0)(eslint@9.14.0)(typescript@5.6.3)(vue-eslint-parser@9.4.3)
+      '@types/big.js':
+        specifier: ^6.2.2
+        version: 6.2.2
       '@types/bmapgl':
         specifier: 0.0.7
         version: 0.0.7
@@ -2859,6 +2865,10 @@ packages:
       '@turf/meta': 6.5.0
     dev: false
 
+  /@types/big.js@6.2.2:
+    resolution: {integrity: sha512-e2cOW9YlVzFY2iScnGBBkplKsrn2CsObHQ2Hiw4V1sSyiGbgWL8IyqE3zFi1Pt5o1pdAtYkDAIsF3KKUPjdzaA==}
+    dev: true
+
   /@types/bmapgl@0.0.7:
     resolution: {integrity: sha512-3R0wFbZtynfHBJq0v477amaNH3t2u2CzBo46ViIPDdOTEJJ+Ma/ql4X8tS2XjDZcZhDAr6QDWoqV8SZvp6STvA==}
     dev: true
@@ -4476,6 +4486,10 @@ packages:
 
   /big.js@5.2.2:
     resolution: {integrity: sha512-vyL2OymJxmarO8gxMr0mhChsO9QGwhynfuu4+MHTAW6czfq9humCB7rKpUjDd9YUiDPU4mzpyupFSvOClAwbmQ==}
+
+  /big.js@6.2.2:
+    resolution: {integrity: sha512-y/ie+Faknx7sZA5MfGA2xKlu0GDv8RWrXGsmlteyJQ2lvoKv9GBK/fpRMc2qlSoBAgNxrixICFCBefIq8WCQpQ==}
+    dev: false
 
   /binary-extensions@2.3.0:
     resolution: {integrity: sha512-Ceh+7ox5qe7LJuLHoY0feh3pHuUDHAcRUeyL2VYghZwfpkNIy/+8Ocg0a3UuSoYzavmylwuLWQOf3hl0jjMMIw==}

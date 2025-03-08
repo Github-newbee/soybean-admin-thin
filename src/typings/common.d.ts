@@ -22,4 +22,6 @@ declare namespace CommonType {
   type RecordNullable<T> = {
     [K in keyof T]?: T[K] | undefined;
   };
+
+  type Recordable<T = any> = Record<string, T>;
 }
